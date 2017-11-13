@@ -1,6 +1,7 @@
 package com.thougthworks
 
 import com.thoughtworks.{NoopQueue, RestaurantHandler}
+import com.thoughtworks.RestaurantQueue._
 
 /** embedded server */
 object Server {
@@ -8,5 +9,6 @@ object Server {
     unfiltered.netty.Server.http(8080)
       .handler(RestaurantHandler(NoopQueue))
       .run()
+      //.run({ _ => initDb() }, { srv => database.close() }) // TODO: Find out why table is not created
   }
 }

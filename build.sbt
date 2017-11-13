@@ -22,11 +22,18 @@ version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
+fork in run := true
+
 val unfilteredVersion = "0.9.1"
 
 libraryDependencies ++= Seq(
    "ws.unfiltered" %% "unfiltered-netty-server" % unfilteredVersion,
    "net.databinder.dispatch" %% "dispatch-core" % "0.13.2",
-   "ws.unfiltered" % "unfiltered-directives_2.12" % "0.9.1",
-   "ws.unfiltered" %% "unfiltered-specs2" % unfilteredVersion % "test"
+   "ws.unfiltered" %% "unfiltered-directives" % "0.9.1",
+   "ws.unfiltered" %% "unfiltered-specs2" % unfilteredVersion % "test",
+
+   // DB related dependencies
+   "com.typesafe.slick" %% "slick" % "3.2.1",
+   "org.slf4j" % "slf4j-nop" % "1.7.10",
+   "com.h2database" % "h2" % "1.4.187"
 )

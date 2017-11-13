@@ -2,7 +2,7 @@ package com.thoughtworks
 
 import com.thoughtworks.Restaurant.{ApiError, Food}
 import unfiltered.directives.Directives._
-import unfiltered.directives.{Directive, data, _}
+import unfiltered.directives.{Directive, data}
 
 object Waiter {
   val quantity = data.as.Int named "count"
@@ -10,7 +10,7 @@ object Waiter {
 
   val maybeFood: (Option[Int], Option[String]) => Either[ApiError, Food] =
     (maybeQuantity, maybeValue) => (maybeQuantity, maybeValue) match {
-      case (Some(q), Some(v)) => Right(Food(v, q))
+      case (Some(q), Some(v)) => Right(Food(None, v, q))
       case _ => Left(ApiError("oops"))
     }
 
