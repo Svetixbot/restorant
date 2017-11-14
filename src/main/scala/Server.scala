@@ -1,14 +1,13 @@
 package com.thougthworks
 
-import com.thoughtworks.{NoopQueue, RestaurantHandler}
-import com.thoughtworks.RestaurantQueue._
+import com.thoughtworks.{DB, RestaurantHandler, RestaurantQueue}
 
 /** embedded server */
 object Server {
   def main(args: Array[String]): Unit = {
+    val database = DB.create
     unfiltered.netty.Server.http(8080)
-      .handler(RestaurantHandler(NoopQueue))
-      .run()
-      //.run({ _ => initDb() }, { srv => database.close() }) // TODO: Find out why table is not created
+      .handler(RestaurantHandler(RestaurantQueue(database)))
+      .run({ _ => DB.InitDB(database) }, { _ => DB.close(database) })
   }
 }
