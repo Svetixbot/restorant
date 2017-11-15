@@ -42,16 +42,8 @@ testOnly com.thoughtworks.RestaurantHandlerSpec
 Delivery type can only be 1 of Deliver or Pick up
 
 ## References
-list to unfiltered
-scalacheck
-
-
-
-TODO
-2. Rename project and endpoints
-7. Implemnent challenge 4 (how to writes parsers for enums)
-9. Ty to go through challenges.
-
+1. [unfiltered](http://unfiltered.ws)
+2. [scalacheck](https://www.scalacheck.org)
 
 
 
