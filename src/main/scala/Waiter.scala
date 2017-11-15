@@ -2,7 +2,7 @@ package com.thoughtworks
 
 import com.thoughtworks.Restaurant.{ApiError, Food}
 import unfiltered.directives.Directives._
-import unfiltered.directives.{Directive, data}
+import unfiltered.directives.data
 
 object Waiter {
   val quantity = data.as.Int named "count"
