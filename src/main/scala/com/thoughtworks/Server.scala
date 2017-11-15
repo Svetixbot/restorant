@@ -1,6 +1,4 @@
-package com.thougthworks
-
-import com.thoughtworks.{RestaurantHandler, RestaurantQueue}
+package com.thoughtworks
 
 /** embedded server */
 object Server {

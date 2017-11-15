@@ -1,9 +1,10 @@
 package com.thoughtworks
 
 import java.util.UUID
-import scala.collection.concurrent.TrieMap
 
 import com.thoughtworks.Restaurant.{ApiError, Food, FoodStatus, RequestId}
+
+import scala.collection.concurrent.TrieMap
 
 class SimpleDB extends DB {
 

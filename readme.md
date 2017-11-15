@@ -60,27 +60,11 @@ scalacheck
 
 
 TODO
-1. Queue functions should return Future
 2. Rename project and endpoints
-3. Write specs for Restaurant handler
-4. Write specs for Restaurant queue
-5. Reuse the insert statement in init db
-6. Write specs for parseQuestions
 7. Implemnent challenge 4 (how to writes parsers for enums)
-8. DB should return generated ID, replace DB with MAP
 9. Ty to go through challenges.
 10. move files into related package
-11. Status is not implemented.
 
-Priorities:
-8 J
-5 J
-3 S
-4 S
-6 S
-2
-7
-1 J
 
 
 
