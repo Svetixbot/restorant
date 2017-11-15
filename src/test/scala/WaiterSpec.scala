@@ -28,4 +28,8 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
         id = question.parameterValues("requestId").head)))
   })
 
+  property("parseInvalidQuestion") = forAll(invalidQuestion) (question => {
+    Waiter.parseQuestion(question) == Success(Left(ApiError("oops")))
+  })
+
 }
