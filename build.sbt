@@ -28,11 +28,7 @@ libraryDependencies ++= Seq(
    "ws.unfiltered" %% "unfiltered-netty-server" % unfilteredVersion,
    "net.databinder.dispatch" %% "dispatch-core" % "0.13.2",
    "ws.unfiltered" %% "unfiltered-directives" % "0.9.1",
-
- // DB related dependencies
-   "com.typesafe.slick" %% "slick" % "3.2.1",
    "org.slf4j" % "slf4j-nop" % "1.7.10",
-   "com.h2database" % "h2" % "1.4.187",
 
-    "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
+   "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 )
