@@ -26,18 +26,6 @@ testOnly com.thoughtworks.WaiterSpec
 
 ## Challenge 2
 
-### Implement RestaurantQueue
-Run the sbt console first,
-```sh
-sbt
-```
-and run the tests
-```sh
-testOnly com.thoughtworks.RestaurantQueueSpec
-```
-
-## Challenge 3
-
 ### Implement RestaurantHandler
 Run the sbt console first,
 ```sh
@@ -48,7 +36,7 @@ and run the tests
 testOnly com.thoughtworks.RestaurantHandlerSpec
 ```
 
-## Challenge 4
+## Challenge 3
 ### Add deliveryType field to request
 
 Delivery type can only be 1 of Deliver or Pick up
@@ -63,7 +51,6 @@ TODO
 2. Rename project and endpoints
 7. Implemnent challenge 4 (how to writes parsers for enums)
 9. Ty to go through challenges.
-10. move files into related package
 
 
 

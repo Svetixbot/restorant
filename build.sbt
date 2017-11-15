@@ -1,6 +1,6 @@
-organization := "com.example"
+organization := "com.thoughtworks"
 
-name := "thedoor"
+name := "unfiltered-workshop"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
