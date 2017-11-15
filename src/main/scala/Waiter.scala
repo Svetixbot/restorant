@@ -10,7 +10,7 @@ object Waiter {
 
   val maybeFood: (Option[Int], Option[String]) => Either[ApiError, Food] =
     (maybeQuantity, maybeValue) => (maybeQuantity, maybeValue) match {
-      case (Some(q), Some(v)) => Right(Food(None, v, q))
+      case (Some(q), Some(v)) => Right(Food(v, q))
       case _ => Left(ApiError("oops"))
     }
 

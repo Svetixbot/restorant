@@ -36,5 +36,5 @@ libraryDependencies ++= Seq(
    "org.slf4j" % "slf4j-nop" % "1.7.10",
    "com.h2database" % "h2" % "1.4.187",
 
-    "org.scalacheck" %% "scalacheck" % "1.13.4"
+    "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 )

@@ -31,8 +31,8 @@ trait Arbitraries {
 
   val foodRequests = for {
     food <- Gen.alphaStr suchThat (_.length > 0)
-    quantity <- Gen.posNum[Int]
-  } yield Food(None, food, quantity)
+    quantity <- Gen.posNum
+  } yield Food(food, quantity)
 
   val questions = for {
     id <- Gen.alphaStr suchThat (_.length > 0)

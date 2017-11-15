@@ -10,7 +10,7 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
   property("parseValidRequest") = forAll(validHttpRequests) { request => {
 //    collect(request){
       Waiter.parseRequest(request) ==
-        Success(Right(Food(id = None,
+        Success(Right(Food(
           value = request.parameterValues("food").head,
           count = request.parameterValues("count").head.toInt)))
 //      }

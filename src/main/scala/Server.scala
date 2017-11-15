@@ -1,13 +1,12 @@
 package com.thougthworks
 
-import com.thoughtworks.{DB, RestaurantHandler, RestaurantQueue}
+import com.thoughtworks.{RestaurantHandler, RestaurantQueue, SimpleDB}
 
 /** embedded server */
 object Server {
   def main(args: Array[String]): Unit = {
-    val database = DB.create
     unfiltered.netty.Server.http(8080)
-      .handler(RestaurantHandler(RestaurantQueue(database)))
-      .run({ _ => DB.InitDB(database) }, { _ => DB.close(database) })
+      .handler(RestaurantHandler(RestaurantQueue()))
+      .run()
   }
 }
