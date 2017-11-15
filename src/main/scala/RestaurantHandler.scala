@@ -36,7 +36,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
       } yield status
 
       status.fold(error => ResponseString(s"Sorry, there was an ${error.value}"),
-        st => ResponseString(s"Your requestID is: ${st.status}"))
+        st => ResponseString(s"Your status is: ${st.status}"))
     }
   }
 
