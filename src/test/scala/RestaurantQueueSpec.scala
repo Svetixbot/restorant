@@ -5,7 +5,7 @@ import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 import unfiltered.directives.Result.Success
 
-object RestaurantQueueSpec extends Properties("Waiter") with Arbitraries {
+object RestaurantQueueSpec extends Properties("Queue") with Arbitraries {
 
   property("askForFood:creates a request") = forAll(foodRequests) (food => {
     RestaurantQueue(???).askFor(food) == ???
@@ -14,5 +14,5 @@ object RestaurantQueueSpec extends Properties("Waiter") with Arbitraries {
   property("isItDoneYet: gets back with a status") = forAll(questions) (question => {
     RestaurantQueue(???).isItDoneYet(question) == ???
   })
-  
+
 }
