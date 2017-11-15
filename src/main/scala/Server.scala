@@ -1,6 +1,6 @@
 package com.thougthworks
 
-import com.thoughtworks.{RestaurantHandler, RestaurantQueue, SimpleDB}
+import com.thoughtworks.{RestaurantHandler, RestaurantQueue}
 
 /** embedded server */
 object Server {

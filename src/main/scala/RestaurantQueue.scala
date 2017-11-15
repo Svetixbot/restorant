@@ -2,10 +2,6 @@ package com.thoughtworks
 
 import com.thoughtworks.Restaurant.{ApiError, Food, FoodStatus, RequestId}
 
-import scala.concurrent.Await
-import scala.concurrent.duration._
-import scala.util.control.Exception.allCatch
-
 case class RestaurantQueue() extends Queue {
   private val database = new SimpleDB()
 
