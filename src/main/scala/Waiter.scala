@@ -14,7 +14,7 @@ object Waiter {
       case _ => Left(ApiError("oops"))
     }
 
-  val parseRequest: Directive[Any, Nothing, Either[ApiError, Food]] = for {
+  val parseRequest = for {
     maybeQuantity <- quantity
     maybeValue <- foodValue
   } yield maybeFood(maybeQuantity, maybeValue)
