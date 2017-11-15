@@ -2,29 +2,10 @@ package com.thoughtworks
 
 import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
 import unfiltered.directives.Directives._
-import unfiltered.directives.data
+import unfiltered.directives.{Directive, data}
 
 object Waiter {
-  val quantity = data.as.Int named "quantity"
-  val foodValue = data.as.String named "food"
+  val parseRequest: Directive[Any, Nothing, Either[ApiError, Food]] = ???
 
-  val maybeFood: (Option[Int], Option[String]) => Either[ApiError, Food] =
-    (maybeQuantity, maybeValue) => (maybeQuantity, maybeValue) match {
-      case (Some(q), Some(v)) => Right(Food(v, q))
-      case _ => Left(ApiError("oops"))
-    }
-
-  val parseRequest = for {
-    maybeQuantity <- quantity
-    maybeValue <- foodValue
-  } yield maybeFood(maybeQuantity, maybeValue)
-
-  val parseQuestion = {
-    for {
-      v <- data.as.String named "requestId"
-    } yield v match {
-      case Some(value) => Right(RequestId(value))
-      case _ => Left(ApiError("oops"))
-    }
-  }
+  val parseQuestion: Directive[Any, Nothing, Either[ApiError, RequestId]] = ???
 }
