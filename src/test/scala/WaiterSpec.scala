@@ -22,4 +22,6 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
     Waiter.parseRequest(request) == Success(Left(ApiError("oops")))
   })
 
+
+
 }
