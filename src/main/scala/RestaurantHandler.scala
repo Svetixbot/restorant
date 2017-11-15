@@ -1,6 +1,5 @@
 package com.thoughtworks
 
-import com.thoughtworks.Restaurant.RequestId
 import unfiltered.directives._
 import unfiltered.netty.cycle.Plan.Intent
 import unfiltered.netty.{ServerErrorResponse, cycle}
@@ -33,7 +32,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
     } yield {
       val status = for {
         id <- maybeId
-        status <- queue.isItDoneYet(RequestId(id))
+        status <- queue.isItDoneYet(id)
       } yield status
 
       status.fold(error => ResponseString(s"Sorry, there was an ${error.value}"),

@@ -19,4 +19,9 @@ trait Arbitraries {
   } yield UnfilteredHttpRequest(Map(param1 -> Seq(value1),
                                     param2 -> Seq(value2)))
 
+  val validQuestion = for {
+    requestId <- Gen.alphaStr suchThat(_.length > 0)
+  } yield UnfilteredHttpRequest(Map("requestId" -> Seq(requestId)))
+
+
 }

@@ -1,6 +1,6 @@
 package com.thoughtworks
 
-import com.thoughtworks.Restaurant.{ApiError, Food}
+import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 import unfiltered.directives.Result.Success
@@ -22,6 +22,10 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
     Waiter.parseRequest(request) == Success(Left(ApiError("oops")))
   })
 
-
+  property("parseValidQuestion") = forAll(validQuestion) (question => {
+    Waiter.parseQuestion(question) ==
+      Success(Right(RequestId(
+        id = question.parameterValues("requestId").head)))
+  })
 
 }

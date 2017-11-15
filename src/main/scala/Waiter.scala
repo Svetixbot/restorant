@@ -1,6 +1,6 @@
 package com.thoughtworks
 
-import com.thoughtworks.Restaurant.{ApiError, Food}
+import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
 import unfiltered.directives.Directives._
 import unfiltered.directives.data
 
@@ -21,9 +21,9 @@ object Waiter {
 
   val parseQuestion = {
     for {
-      v <- data.as.Int named "requestId"
+      v <- data.as.String named "requestId"
     } yield v match {
-      case Some(value) => Right(value)
+      case Some(value) => Right(RequestId(value))
       case _ => Left(ApiError("oops"))
     }
   }
