@@ -5,7 +5,7 @@ import unfiltered.directives.Directives._
 import unfiltered.directives.data
 
 object Waiter {
-  val quantity = data.as.Int named "count"
+  val quantity = data.as.Int named "quantity"
   val foodValue = data.as.String named "food"
 
   val maybeFood: (Option[Int], Option[String]) => Either[ApiError, Food] =

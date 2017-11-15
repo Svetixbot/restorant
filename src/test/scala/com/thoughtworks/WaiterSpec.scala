@@ -11,8 +11,8 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
 //    collect(request){
       Waiter.parseRequest(request) ==
         Success(Right(Food(
-          value = request.parameterValues("food").head,
-          count = request.parameterValues("count").head.toInt)))
+          food = request.parameterValues("food").head,
+          quantity = request.parameterValues("quantity").head.toInt)))
 //      }
     }
 

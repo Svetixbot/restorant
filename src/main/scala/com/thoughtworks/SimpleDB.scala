@@ -2,7 +2,7 @@ package com.thoughtworks
 
 import java.util.UUID
 
-import com.thoughtworks.Restaurant.{ApiError, Food, FoodStatus, RequestId}
+import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
 
 import scala.collection.concurrent.TrieMap
 
@@ -23,7 +23,7 @@ class SimpleDB extends DB {
 
     override def get(rq: RequestId) = {
       database.get(rq.id) match {
-        case Some(food) => Right(FoodStatus(s"${food.count} of ${food.value} has been cooked"))
+        case Some(food) => Right(s"${food.quantity} of ${food.food} has been cooked")
         case None => Left(ApiError("unknown request id"))
       }
     }

@@ -22,8 +22,6 @@ version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
-fork in run := true
-
 val unfilteredVersion = "0.9.1"
 
 libraryDependencies ++= Seq(

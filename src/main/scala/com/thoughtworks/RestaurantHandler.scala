@@ -13,7 +13,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
   override def intent = areYouDoneYet orElse cookPlease
 
   val cookPlease: Intent = Directive.Intent {
-    case POST(Path("/food")) => for {
+    case POST(Path("/imhungry")) => for {
       foodRequest <- Waiter.parseRequest
     } yield {
       val queued = for {
@@ -27,7 +27,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
   }
 
   val areYouDoneYet: Intent = Directive.Intent {
-    case GET(Path("/food")) => for {
+    case GET(Path("/imhungry")) => for {
       maybeId <- Waiter.parseQuestion
     } yield {
       val status = for {
@@ -36,7 +36,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
       } yield status
 
       status.fold(error => ResponseString(s"Sorry, there was an ${error.value}"),
-        st => ResponseString(s"Your status is: ${st.status}"))
+        status => ResponseString(s"Your status is: $status"))
     }
   }
 

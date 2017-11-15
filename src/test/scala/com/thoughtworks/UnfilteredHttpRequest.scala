@@ -14,7 +14,7 @@ case class UnfilteredHttpRequest(m: String, values: Map[String, Seq[String]]) ex
 
   override def method: String = m
 
-  override def uri: String = "/food"
+  override def uri: String = "/imhungry"
 
   override def parameterNames: Iterator[String] = Iterator("food", "quantity")
 

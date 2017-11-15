@@ -9,7 +9,7 @@ trait Arbitraries {
     foodValue <- alphaStr suchThat (_.length > 0)
     count <- posNum[Int]
   } yield UnfilteredHttpRequest.POST(Map("food" -> Seq(foodValue.toString),
-    "count" -> Seq(count.toString)))
+    "quantity" -> Seq(count.toString)))
 
   val invalidHttpRequests = for {
     param1 <- alphaStr

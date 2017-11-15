@@ -9,7 +9,7 @@ POST: .../imhungry?food=mushed&quantity=2
 ```
 which will get back a requestId
 ```sh
-GET: .../imhungry?requestid=123
+GET: .../imhungry?requestId=123
 ```
 
 ## Challenge 1
@@ -40,6 +40,31 @@ testOnly com.thoughtworks.RestaurantHandlerSpec
 ### Add deliveryType field to request
 
 Delivery type can only be 1 of Deliver or Pick up
+
+## How to run
+
+```sh
+sbt run
+```
+
+### Test it with curl
+POST:
+```sh
+curl -X POST -d food=cheese -d quantity=2 localhost:8080/imhungry
+```
+expected:
+
+```sh
+Your requestID is: b39126af-70a7-4c7c-a88a-a5e627d35635Y
+```
+GET:
+```sh
+curl localhost:8080/imhungry?requestId=b39126af-70a7-4c7c-a88a-a5e627d35635
+```
+expected:
+```sh
+Your status is: 2 of cheese has been cooked
+```
 
 ## References
 1. [unfiltered](http://unfiltered.ws)
