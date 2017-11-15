@@ -17,7 +17,7 @@ case class UnfilteredHttpRequest(values: Map[String, Seq[String]]) extends HttpR
 
   override def parameterNames: Iterator[String] = ???
 
-  override def parameterValues(param: String): Seq[String] = values(param)
+  override def parameterValues(param: String): Seq[String] = values.getOrElse(param, Nil)
 
   override def headerNames: Iterator[String] = ???
 

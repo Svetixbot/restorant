@@ -11,4 +11,12 @@ trait Arbitraries {
   } yield UnfilteredHttpRequest(Map("food" -> Seq(foodValue.toString),
     "count" -> Seq(count.toString)))
 
+  val invalidHttpRequests = for {
+    param1 <- Gen.alphaStr
+    param2 <- Gen.alphaStr
+    value1 <- Gen.alphaStr
+    value2 <- Gen.alphaStr
+  } yield UnfilteredHttpRequest(Map(param1 -> Seq(value1),
+                                    param2 -> Seq(value2)))
+
 }

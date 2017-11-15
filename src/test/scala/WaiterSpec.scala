@@ -1,13 +1,13 @@
 package com.thoughtworks
 
-import com.thoughtworks.Restaurant.Food
+import com.thoughtworks.Restaurant.{ApiError, Food}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 import unfiltered.directives.Result.Success
 
 object WaiterSpec extends Properties("Waiter") with Arbitraries {
 
-  property("parseRequest") = forAll(validHttpRequests) { request => {
+  property("parseValidRequest") = forAll(validHttpRequests) { request => {
 //    collect(request){
       Waiter.parseRequest(request) ==
         Success(Right(Food(id = None,
@@ -17,5 +17,9 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
     }
 
   }
+
+  property("parseInvalidRequest") = forAll(invalidHttpRequests) (request => {
+    Waiter.parseRequest(request) == Success(Left(ApiError("oops")))
+  })
 
 }
