@@ -68,7 +68,9 @@ TODO
 6. Write specs for parseQuestions
 7. Implemnent challenge 4 (how to writes parsers for enums)
 8. DB should return generated ID, replace DB with MAP
-
+9. Ty to go through challenges.
+10. move files into related package
+11. Status is not implemented.
 
 Priorities:
 8 J

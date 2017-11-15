@@ -1,5 +1,6 @@
 package com.thoughtworks
 
+import com.thoughtworks.Restaurant.{Food, RequestId}
 import org.scalacheck.Gen
 import org.scalacheck.Gen.posNum
 
@@ -27,5 +28,14 @@ trait Arbitraries {
     param <- Gen.alphaStr
     value <- Gen.alphaStr
   } yield UnfilteredHttpRequest(Map(param -> Seq(value)))
+
+  val foodRequests = for {
+    food <- Gen.alphaStr suchThat (_.length > 0)
+    quantity <- Gen.posNum
+  } yield Food(None, food, quantity)
+
+  val questions = for {
+    id <- Gen.alphaStr suchThat (_.length > 0)
+  } yield RequestId(id)
 
 }
