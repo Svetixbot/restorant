@@ -23,7 +23,7 @@ class SimpleDB extends DB {
 
     override def get(rq: RequestId) = {
       database.get(rq.id) match {
-        case Some(food) => Right(s"${food.quantity} of ${food.food} has been cooked")
+        case Some(food) => Right(s"${food.quantity} servings of ${food.food} has been prepared")
         case None => Left(ApiError("unknown request id"))
       }
     }
