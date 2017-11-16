@@ -25,7 +25,7 @@ Intent is a partial function for handling requests.
 ```
 
 ### Directive
-Directive is a concepts which provides a monadic api on top of unfiltered.
+Directive is a concept which provides a monadic api on top of unfiltered.
 We can leverage a monadic behaivor of directive, by:
  1. spliting the logic of our http handlers into small independent functions.
  2. combining this little functions together in an imperetive way.
@@ -43,14 +43,14 @@ def intent = Path.Intent {
 ```
 
 ### What's this monadic thing again?
-Every directive is essentially a function from HttpRequest to Result[R, A]
-Result class provides us a monadic behavior. What does it mean?
-Result will be a wrapper of the output of your directive, which can contain either left or right.
-Left is usually represent and Error or a value indicating that some calculation in your function went wrong.
+Every directive is essentially a function from HttpRequest to Result[R, A].
+Result class provides us a monadic behavior. What does that mean?
+Result will be a wrapper of the output of your directive, which can contain either a left or right.
+Left is usually representing an Error or a value indicating that some calculation in your function went wrong.
 Right is the desired result of your function, when things go the way you expect.
 
 We always have this desire to split our code into independent self-contained testable units.
-And we always fight with dependencies, when one unit depend on the outcomes of the other unit.
+And we always fight with dependencies, when one unit depends on the outcome of the other units.
 
 Here are the examples of 2 units/functions: getCustomerById(id) and getTaxForCustomer(customer)
 
@@ -75,17 +75,17 @@ else {
 }
 ```
 
-What monadic behaivor gives us:
+What monadic behavior instead gives us:
 
 ```sh
 taxOrError = getCustomerById(id).flatMap{customer => 
     getTaxForCustomer(customer)
 }
 ```
-By `flatMapping` we will only call getTaxForCustomer if getCustomerById returns a valid customer. If there was an error, it will be assigned into taxOrError variable.
+By `flatMapping` we will only call getTaxForCustomer if getCustomerById returns a valid customer. If there was an error, it will be assigned into the taxOrError variable.
 
 ## Outcomes of the workshop:
-### 1. Practise to write partial functions
+### 1. Practise writing partial functions
 ### 2. Compose partial functions with orElse
 ### 3. Working with monadic behavior of results.
 ### 4. Glimpse of property-based testing.
@@ -147,6 +147,3 @@ Your status is: 2 of cheese has been cooked
 ## References
 1. [unfiltered](http://unfiltered.ws)
 2. [scalacheck](https://www.scalacheck.org)
-
-
-
