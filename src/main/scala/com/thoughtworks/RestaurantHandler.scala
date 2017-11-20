@@ -12,6 +12,12 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
 
   override def intent = areYouDoneYet orElse cookPlease
 
+  /*
+	1. Check out the signatures first.
+	2. Directive.Intent takes partial function as an input.
+		That's where we can pattern match on the Path
+			`case GET(Path("/suchPath")) => ???`
+  */
   val cookPlease: Intent = Directive.Intent {
     case POST(Path("/imhungry")) => for {
       foodRequest <- Waiter.parseRequest
