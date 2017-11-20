@@ -1,5 +1,6 @@
 package com.thoughtworks
 
+import com.thoughtworks.OptionToEither.toEither
 import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
 import unfiltered.directives.Directives._
 import unfiltered.directives.data
@@ -18,26 +19,33 @@ object Waiter {
     * Check out pattern matching or fold function.
     * */
 
-  val quantity = data.as.Int named "quantity"
-  val foodValue = data.as.String named "food"
+  val quantity = (data.as.Int named "quantity").map(
+    maybeQuantity => toEither(
+      ApiError("Error while parsing quantity parameter"),
+      maybeQuantity))
 
-  val maybeFood: (Option[Int], Option[String]) => Either[ApiError, Food] =
-    (maybeQuantity, maybeValue) => (maybeQuantity, maybeValue) match {
-      case (Some(q), Some(v)) => Right(Food(v, q))
-      case _ => Left(ApiError("oops"))
-    }
 
+  val foodValue = (data.as.String named "food").map(
+    maybeFood => toEither(
+      ApiError("Error while parsing food parameter"),
+      maybeFood
+    )
+  )
+
+  /* This doesn't accumulate errors... */
   val parseRequest = for {
     maybeQuantity <- quantity
     maybeValue <- foodValue
-  } yield maybeFood(maybeQuantity, maybeValue)
+  } yield for {
+      qnt <- maybeQuantity
+      food <- maybeValue
+    } yield Food(food, qnt)
 
-  val parseQuestion = {
-    for {
-      v <- data.as.String named "requestId"
-    } yield v match {
-      case Some(value) => Right(RequestId(value))
-      case _ => Left(ApiError("oops"))
-    }
-  }
+  val parseQuestion = (data.as.String named "requestId").map(
+    maybeRequestId => toEither(
+      ApiError("Error while parsing requestId"),
+      maybeRequestId.map(RequestId)
+    )
+  )
+
 }

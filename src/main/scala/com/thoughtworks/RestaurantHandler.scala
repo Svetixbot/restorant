@@ -27,7 +27,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
         id <- queue.askFor(what)
       } yield id
 
-      queued.fold(error => ResponseString(s"Sorry, there was an ${error.value}"),
+      queued.fold(error => ResponseString(s"${error.value}"),
                   rq => ResponseString(s"Your requestID is: ${rq.id}"))
     }
   }
@@ -41,7 +41,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
         status <- queue.isItDoneYet(id)
       } yield status
 
-      status.fold(error => ResponseString(s"Sorry, there was an ${error.value}"),
+      status.fold(error => ResponseString(s"${error.value}"),
         status => ResponseString(s"Your status is: $status"))
     }
   }

@@ -19,7 +19,7 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
   }
 
   property("parseInvalidRequest") = forAll(invalidHttpRequests) (request => {
-    Waiter.parseRequest(request) == Success(Left(ApiError("oops")))
+    Waiter.parseRequest(request) == Success(Left(ApiError("Error while parsing quantity parameter")))
   })
 
   property("parseValidQuestion") = forAll(validQuestion) (question => {
@@ -29,7 +29,7 @@ object WaiterSpec extends Properties("Waiter") with Arbitraries {
   })
 
   property("parseInvalidQuestion") = forAll(invalidQuestion) (question => {
-    Waiter.parseQuestion(question) == Success(Left(ApiError("oops")))
+    Waiter.parseQuestion(question) == Success(Left(ApiError("Error while parsing requestId")))
   })
 
 }

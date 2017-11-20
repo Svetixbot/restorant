@@ -16,11 +16,11 @@ object RestaurantHandlerSpec extends Properties("Handler") with Arbitraries {
 
   property("askForFoodHandler:invalid request") = forAll(invalidHttpRequests) (request => {
     RestaurantHandler(NoopQueue).cookPlease(request) ==
-      ResponseString("Sorry, there was an oops")
+      ResponseString("Error while parsing quantity parameter")
   })
 
   property("areYouDoneYet:invalid response") = forAll(invalidQuestion) (question => {
     RestaurantHandler(NoopQueue).areYouDoneYet(question) ==
-      ResponseString("Sorry, there was an oops")
+      ResponseString("Error while parsing requestId")
   })
 }
