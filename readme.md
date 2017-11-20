@@ -147,3 +147,20 @@ Your status is: 2 of cheese has been cooked
 ## References
 1. [unfiltered](http://unfiltered.ws)
 2. [scalacheck](https://www.scalacheck.org)
+
+## TODO
+Specs:
+1. Add normal matchers (maybe specs2)
+2. Expections on incorrect path is not obviouse
+
+Solve challenge 3
+Order challenges by complexity
+Extra challenge: accumulate api errors
+
+unfiltered: 
+What are these type parameters in Directive and Intent?
+servlets
+
+try to solve it (will it fail without commenting the tests?)
+Conflict in dependencies
+
