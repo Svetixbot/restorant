@@ -16,7 +16,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
 	1. Check out the signatures first.
 	2. Directive.Intent takes partial function as an input.
 		That's where we can pattern match on the Path
-			`case GET(Path("/suchPath")) => ???`
+			`case GET(Path("/imhungry")) => ???`
   */
   val cookPlease: Intent = Directive.Intent {
     case POST(Path("/imhungry")) => for {
