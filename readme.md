@@ -156,11 +156,12 @@ Specs:
 Solve challenge 3
 Order challenges by complexity
 Extra challenge: accumulate api errors
+try to solve it (will it fail without commenting the tests?)
+
+
 
 unfiltered: 
 What are these type parameters in Directive and Intent?
 servlets
 
-try to solve it (will it fail without commenting the tests?)
-Conflict in dependencies
 
