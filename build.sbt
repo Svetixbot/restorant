@@ -26,9 +26,8 @@ val unfilteredVersion = "0.9.1"
 
 libraryDependencies ++= Seq(
    "ws.unfiltered" %% "unfiltered-netty-server" % unfilteredVersion,
-   "net.databinder.dispatch" %% "dispatch-core" % "0.13.2",
    "ws.unfiltered" %% "unfiltered-directives" % "0.9.1",
    "org.slf4j" % "slf4j-nop" % "1.7.10",
-
-   "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
+   "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
+   "org.specs2" %% "specs2-scalacheck" % "3.9.5" % "test"
 )
