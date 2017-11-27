@@ -149,16 +149,12 @@ Your status is: 2 of cheese has been cooked
 2. [scalacheck](https://www.scalacheck.org)
 
 ## TODO
-Specs:
-1. Add normal matchers (maybe specs2)
-2. Expections on incorrect path is not obviouse
 
 Solve challenge 3
-Order challenges by complexity
 Extra challenge: accumulate api errors
+Order challenges by complexity
+
 try to solve it (will it fail without commenting the tests?)
-
-
 
 unfiltered: 
 What are these type parameters in Directive and Intent?

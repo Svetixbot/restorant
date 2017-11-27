@@ -4,13 +4,13 @@ import unfiltered.directives._
 import unfiltered.netty.cycle.Plan.Intent
 import unfiltered.netty.{ServerErrorResponse, cycle}
 import unfiltered.request.{GET, POST, Path}
-import unfiltered.response.ResponseString
+import unfiltered.response.{NotFound, ResponseString}
 
 @io.netty.channel.ChannelHandler.Sharable
 case class RestaurantHandler(queue: Queue) extends cycle.Plan
   with cycle.SynchronousExecution with ServerErrorResponse {
 
-  override def intent = areYouDoneYet orElse cookPlease
+  override def intent = areYouDoneYet orElse cookPlease orElse notFound
 
   /*
 	1. Check out the signatures first.
@@ -19,7 +19,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
 			`case GET(Path("/imhungry")) => ???`
   */
   val cookPlease: Intent = Directive.Intent {
-    case POST(Path("/imhungry")) => for {
+    case POST(Path("/iamhungry")) => for {
       foodRequest <- Waiter.parseRequest
     } yield {
       val queued = for {
@@ -33,7 +33,7 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
   }
 
   val areYouDoneYet: Intent = Directive.Intent {
-    case GET(Path("/imhungry")) => for {
+    case GET(Path("/iamhungry")) => for {
       maybeId <- Waiter.parseQuestion
     } yield {
       val status = for {
@@ -44,6 +44,10 @@ case class RestaurantHandler(queue: Queue) extends cycle.Plan
       status.fold(error => ResponseString(s"${error.value}"),
         status => ResponseString(s"Your status is: $status"))
     }
+  }
+
+  val notFound: Intent = {
+    case _ => NotFound
   }
 
 

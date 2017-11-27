@@ -5,16 +5,16 @@ import java.io.{InputStream, Reader}
 import unfiltered.netty.ReceivedMessage
 import unfiltered.request.HttpRequest
 
-case class UnfilteredHttpRequest(m: String, values: Map[String, Seq[String]]) extends HttpRequest[ReceivedMessage](ReceivedMessage(null, null, Nil)) {
+case class UnfilteredHttpRequest(mthd: String, path: String, values: Map[String, Seq[String]]) extends HttpRequest[ReceivedMessage](ReceivedMessage(null, null, Nil)) {
   override def inputStream: InputStream = ???
 
   override def reader: Reader = ???
 
   override def protocol: String = ""
 
-  override def method: String = m
+  override def method: String = mthd
 
-  override def uri: String = "/imhungry"
+  override def uri: String = path
 
   override def parameterNames: Iterator[String] = Iterator("food", "quantity")
 
@@ -30,6 +30,6 @@ case class UnfilteredHttpRequest(m: String, values: Map[String, Seq[String]]) ex
 }
 
 object UnfilteredHttpRequest {
-  def POST(values: Map[String, Seq[String]]) = UnfilteredHttpRequest("POST", values)
-  def GET(values: Map[String, Seq[String]]) = UnfilteredHttpRequest("GET", values)
+  def POST(values: Map[String, Seq[String]]) = UnfilteredHttpRequest("POST", "/iamhungry", values)
+  def GET(values: Map[String, Seq[String]]) = UnfilteredHttpRequest("GET", "/iamhungry", values)
 }

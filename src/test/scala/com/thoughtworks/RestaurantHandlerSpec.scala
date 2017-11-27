@@ -13,22 +13,22 @@ object RestaurantHandlerSpec extends Specification with ScalaCheck with Arbitrar
     """
 
   def validFoodHandler = prop((request: UnfilteredHttpRequest) => {
-    RestaurantHandler(NoopQueue).cookPlease(request) mustEqual
+    RestaurantHandler(NoopQueue).intent(request) mustEqual
       ResponseString("Your requestID is: such-id")
   }).setGen(validFoodRequest)
 
   def validFoodStatusCheck = prop((request: UnfilteredHttpRequest) => {
-    RestaurantHandler(NoopQueue).areYouDoneYet(request) mustEqual
+    RestaurantHandler(NoopQueue).intent(request) mustEqual
       ResponseString("Your status is: ok")
   }).setGen(validQuestion)
 
   def invalidFoodHandler = prop((request: UnfilteredHttpRequest) => {
-    RestaurantHandler(NoopQueue).cookPlease(request) mustEqual
+    RestaurantHandler(NoopQueue).intent(request) mustEqual
       ResponseString("Error while parsing quantity parameter")
   }).setGen(invalidPostRequest)
 
   def invalidFoodStatusCheck = prop((request: UnfilteredHttpRequest) => {
-    RestaurantHandler(NoopQueue).areYouDoneYet(request) mustEqual
+    RestaurantHandler(NoopQueue).intent(request) mustEqual
       ResponseString("Error while parsing requestId")
   }).setGen(invalidGetRequest)
 }
