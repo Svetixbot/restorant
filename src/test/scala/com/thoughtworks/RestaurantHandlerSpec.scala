@@ -1,26 +1,34 @@
 package com.thoughtworks
-import org.scalacheck.Prop.forAll
-import org.scalacheck.Properties
+
+import org.specs2.{ScalaCheck, Specification}
 import unfiltered.response.ResponseString
 
-object RestaurantHandlerSpec extends Properties("Handler") with Arbitraries {
-  property("askForFoodHandler:valid request") = forAll(validFoodRequest) (request => {
-    RestaurantHandler(NoopQueue).cookPlease(request) ==
+object RestaurantHandlerSpec extends Specification with ScalaCheck with Arbitraries {
+  override def is = "Request handler spec".title ^
+    s2"""
+      valid food request should respond with request id $validFoodHandler
+      valid food status check should respond with string $validFoodStatusCheck
+      invalid food request should respond with error string $invalidFoodHandler
+      invalid food status check should respond with string $invalidFoodStatusCheck
+    """
+
+  def validFoodHandler = prop((request: UnfilteredHttpRequest) => {
+    RestaurantHandler(NoopQueue).cookPlease(request) mustEqual
       ResponseString("Your requestID is: such-id")
-  })
+  }).setGen(validFoodRequest)
 
-  property("areYouDoneYet:valid response") = forAll(validQuestion) (question => {
-    RestaurantHandler(NoopQueue).areYouDoneYet(question) ==
+  def validFoodStatusCheck = prop((request: UnfilteredHttpRequest) => {
+    RestaurantHandler(NoopQueue).areYouDoneYet(request) mustEqual
       ResponseString("Your status is: ok")
-  })
+  }).setGen(validQuestion)
 
-  property("askForFoodHandler:invalid request") = forAll(invalidHttpRequests) (request => {
-    RestaurantHandler(NoopQueue).cookPlease(request) ==
+  def invalidFoodHandler = prop((request: UnfilteredHttpRequest) => {
+    RestaurantHandler(NoopQueue).cookPlease(request) mustEqual
       ResponseString("Error while parsing quantity parameter")
-  })
+  }).setGen(invalidPostRequest)
 
-  property("areYouDoneYet:invalid response") = forAll(invalidHttpRequests) (question => {
-    RestaurantHandler(NoopQueue).areYouDoneYet(question) ==
+  def invalidFoodStatusCheck = prop((request: UnfilteredHttpRequest) => {
+    RestaurantHandler(NoopQueue).areYouDoneYet(request) mustEqual
       ResponseString("Error while parsing requestId")
-  })
+  }).setGen(invalidGetRequest)
 }

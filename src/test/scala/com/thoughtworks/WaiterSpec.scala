@@ -24,7 +24,7 @@ class WaiterSpec extends Specification with ScalaCheck with Arbitraries {
   def parseApiErrorForFood = prop((request: UnfilteredHttpRequest) => {
     Waiter.parseRequest(request) mustEqual
       Success(Left(ApiError("Error while parsing quantity parameter")))
-  }).setGen(invalidHttpRequests)
+  }).setGen(invalidPostRequest)
 
   def parseQuestions = prop((question: UnfilteredHttpRequest) => {
     Waiter.parseQuestion(question) mustEqual
@@ -33,5 +33,5 @@ class WaiterSpec extends Specification with ScalaCheck with Arbitraries {
 
   def parseApiErrorForQuestion = prop((question: UnfilteredHttpRequest) => {
     Waiter.parseQuestion(question) mustEqual Success(Left(ApiError("Error while parsing requestId")))
-  }).setGen(invalidHttpRequests)
+  }).setGen(invalidGetRequest)
 }

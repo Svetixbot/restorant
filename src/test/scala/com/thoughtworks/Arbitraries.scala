@@ -17,13 +17,18 @@ trait Arbitraries {
   } yield UnfilteredHttpRequest.GET(Map("requestId" -> Seq(requestId)))
 
 
-  val invalidHttpRequests = for {
+  val invalidPostRequest = for {
     param1 <- alphaStr
     param2 <- alphaStr
     value1 <- alphaStr
     value2 <- alphaStr
   } yield UnfilteredHttpRequest.POST(Map(param1 -> Seq(value1),
                                     param2 -> Seq(value2)))
+
+  val invalidGetRequest = for {
+    param <- alphaStr
+    value <- alphaStr
+  } yield UnfilteredHttpRequest.GET(Map(param -> Seq(value)))
 
   val food: Gen[Food] = for {
     food <- alphaStr suchThat (_.length > 0)
