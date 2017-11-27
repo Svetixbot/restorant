@@ -1,35 +1,37 @@
 package com.thoughtworks
 
 import com.thoughtworks.Restaurant.{ApiError, Food, RequestId}
-import org.scalacheck.Prop.forAll
-import org.scalacheck.Properties
+import org.specs2.{ScalaCheck, Specification}
 import unfiltered.directives.Result.Success
 
-object WaiterSpec extends Properties("Waiter") with Arbitraries {
+class WaiterSpec extends Specification with ScalaCheck with Arbitraries {
+  override def is =
+    "Waiter spec".title ^
+      s2"""
+        Valid requests for food should be parsed $parseFood
+        Invalid requests for food should give an api error $parseApiErrorForFood
+        Valid questions should be parsed $parseQuestions
+        Invalid questions should give an api error $parseApiErrorForQuestion
+      """
 
-  property("parseValidRequest") = forAll(validHttpRequests) { request => {
-//    collect(request){
-      Waiter.parseRequest(request) ==
-        Success(Right(Food(
-          food = request.parameterValues("food").head,
-          quantity = request.parameterValues("quantity").head.toInt)))
-//      }
-    }
+  def parseFood = prop((request: UnfilteredHttpRequest) => {
+    Waiter.parseRequest(request) mustEqual
+      Success(Right(Food(
+        food = request.parameterValues("food").head,
+        quantity = request.parameterValues("quantity").head.toInt)))
+  }).setGen(validFoodRequest)
 
-  }
+  def parseApiErrorForFood = prop((request: UnfilteredHttpRequest) => {
+    Waiter.parseRequest(request) mustEqual
+      Success(Left(ApiError("Error while parsing quantity parameter")))
+  }).setGen(invalidHttpRequests)
 
-  property("parseInvalidRequest") = forAll(invalidHttpRequests) (request => {
-    Waiter.parseRequest(request) == Success(Left(ApiError("Error while parsing quantity parameter")))
-  })
+  def parseQuestions = prop((question: UnfilteredHttpRequest) => {
+    Waiter.parseQuestion(question) mustEqual
+      Success(Right(RequestId(id = question.parameterValues("requestId").head)))
+  }).setGen(validQuestion)
 
-  property("parseValidQuestion") = forAll(validQuestion) (question => {
-    Waiter.parseQuestion(question) ==
-      Success(Right(RequestId(
-        id = question.parameterValues("requestId").head)))
-  })
-
-  property("parseInvalidQuestion") = forAll(invalidQuestion) (question => {
-    Waiter.parseQuestion(question) == Success(Left(ApiError("Error while parsing requestId")))
-  })
-
+  def parseApiErrorForQuestion = prop((question: UnfilteredHttpRequest) => {
+    Waiter.parseQuestion(question) mustEqual Success(Left(ApiError("Error while parsing requestId")))
+  }).setGen(invalidHttpRequests)
 }

@@ -4,7 +4,7 @@ import org.scalacheck.Properties
 import unfiltered.response.ResponseString
 
 object RestaurantHandlerSpec extends Properties("Handler") with Arbitraries {
-  property("askForFoodHandler:valid request") = forAll(validHttpRequests) (request => {
+  property("askForFoodHandler:valid request") = forAll(validFoodRequest) (request => {
     RestaurantHandler(NoopQueue).cookPlease(request) ==
       ResponseString("Your requestID is: such-id")
   })
@@ -19,7 +19,7 @@ object RestaurantHandlerSpec extends Properties("Handler") with Arbitraries {
       ResponseString("Error while parsing quantity parameter")
   })
 
-  property("areYouDoneYet:invalid response") = forAll(invalidQuestion) (question => {
+  property("areYouDoneYet:invalid response") = forAll(invalidHttpRequests) (question => {
     RestaurantHandler(NoopQueue).areYouDoneYet(question) ==
       ResponseString("Error while parsing requestId")
   })
